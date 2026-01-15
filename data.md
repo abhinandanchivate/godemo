@@ -1274,9 +1274,10 @@ flowchart TD
     end
 ```
 
+
 ### **Workflow 5: Notification System with Retry Logic**
 ```mermaid
-flowchart TD
+graph TD
     A[Order Confirmed] --> B[Queue Notification Job]
     B --> C{Worker Available?}
     C -->|Yes| D[Worker Picks Job]
@@ -1288,10 +1289,11 @@ flowchart TD
     H --> I[Process Complete]
     
     G -->|No| J[Increment Retry Count]
-    J --> K{Max Retries?<br/>(Default: 3)}
+    J --> K{Max Retries?<br/>Default: 3}
     K -->|No| L[Calculate Backoff Delay<br/>Formula: 2^retry * base_delay]
     L --> M[Requeue with Delay]
     M --> N[Wait for Retry]
+    N --> D
     
     K -->|Yes| O[Update Status: FAILED<br/>Log Error]
     O --> P[Move to Dead Letter Queue]
@@ -1865,17 +1867,22 @@ CREATE TABLE stock_reservations (
 
 ---
 
+
+## **SECTION 6 - COPY AND PASTE THIS EXACTLY:**
+
+
 ## 6. TEST EXECUTION STRATEGY
 
 ### **TDD Implementation Workflow**
+
 ```mermaid
-flowchart TD
+graph TD
     A[Start TDD Cycle] --> B[Write Failing Test]
-    B --> C[Run Test - Should FAIL<br/>(RED Phase)]
+    B --> C[Run Test - Should FAIL<br/>RED Phase]
     C --> D[Write Minimal Code<br/>to Pass Test]
-    D --> E[Run Test - Should PASS<br/>(GREEN Phase)]
+    D --> E[Run Test - Should PASS<br/>GREEN Phase]
     E --> F[Refactor Code<br/>Improve Design]
-    F --> G[Run All Tests - Should PASS<br/>(REFACTOR Phase)]
+    F --> G[Run All Tests - Should PASS<br/>REFACTOR Phase]
     G --> H{All Tests Pass?}
     H -->|Yes| I[Commit Changes]
     H -->|No| J[Debug & Fix]
@@ -1886,14 +1893,16 @@ flowchart TD
     K -->|No| L[TDD Cycle Complete]
     
     subgraph "Test Categories"
-        M[Unit Tests<br/>- Domain models<br/>- Business rules<br/>- Validations]
-        N[Integration Tests<br/>- Database<br/>- External services<br/>- API endpoints]
-        O[E2E Tests<br/>- Complete workflows<br/>- User scenarios<br/>- Performance]
-        P[Concurrency Tests<br/>- Race conditions<br/>- Locking<br/>- Deadlocks]
+        M[Unit Tests - Domain models - Business rules - Validations]
+        N[Integration Tests - Database - External services - API endpoints]
+        O[E2E Tests - Complete workflows - User scenarios - Performance]
+        P[Concurrency Tests - Race conditions - Locking - Deadlocks]
     end
+
 ```
 
 ### **Test Execution Priority Matrix**
+
 ```
 PRIORITY 1: CRITICAL PATH TESTS (Execute First)
 ┌─────────────────────────────────────────────────────────────┐
@@ -1936,6 +1945,7 @@ PRIORITY 4: CONCURRENCY TESTS (Execute Last)
 ```
 
 ### **Test Environment Setup**
+
 ```yaml
 Test Environments:
   - Development:
@@ -1966,5 +1976,26 @@ Test Data Management:
   - Factories: Code to generate test entities
   - Cleanup: Database truncation after tests
   - Isolation: Transaction rollback per test
+```
+```
+
+**Critical fixes made:**
+
+1. **Added a blank line** after the closing ``` and before `### **Test Execution Priority Matrix**`
+2. **Added blank lines** between headings and their content
+3. **Properly formatted** the YAML code block with its own backticks
+4. **Ensured** proper spacing between all sections
+
+**The error was here in your original:**
+```
+    end
+### **Test Execution Priority Matrix**
+```
+**Should be:**
+```
+    end
+```
+
+### **Test Execution Priority Matrix**
 ```
 
